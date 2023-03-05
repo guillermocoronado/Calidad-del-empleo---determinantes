@@ -1,0 +1,383 @@
+---
+title: "Entrega 4"
+author: "Guillermo Coronado"
+date: "26/5/2022"
+output: html_document
+---
+
+# **Introducción**
+
+## Tema y justificación
+
+La presente investigación aborda el tema de la calidad del empleo en el Perú. En específico, busca analizar el efecto de la edad y el nivel educativo de las personas en la calidad del empleo que estas obtienen. En este sentido, la pregunta que guiará este trabajo será la siguiente: ¿De qué manera la edad y el nivel educativo influyen en la calidad del empleo que obtienen las personas en el Perú? La decisión de investigar este tema proviene, por un lado, del interés que poseo por el estudio de temas relacionados al mundo laboral y a la desigualdad, pero, sobre todo, por el hecho de que, a mi consideración, este es un tema necesario a investigar en el Perú, ya que, como es bien sabido, uno de los retos que presenta el país es expandir el acceso al empleo de calidad. En la investigción hallamos que, conforme se aumenta un nivel educativo, aumenta también la calidad del empleo que poseen las personas; no obstante, este efecto positivo disminuye mientras más grande sea la empresa en la que se trabaja. Asimismo, hallamos que tener entre 25 y 44 años, 45 y 65 años, así como ser mayor de 65 años, impactan positivamente en la calidad del empleo que se posee.
+
+## Revisión de literatura
+
+En países como Estados Unidos y China, existe una literatura que analiza la relación entre el tipo de arreglo laboral de las personas y la calidad del empleo que poseen. En esta línea, Kalleberg, Reskin y Hudson (2000) muestran que, para el caso de Estados Unidos, los arreglos “no convencionales” (jornaleros, empleos conseguidos a través de agencias de trabajos temporales, trabajadores tercerizados, empleos temporales en empresas “convencionales”, contratación independiente y otras formas de autoempleo) incrementan la exposición de los trabajadores a “malos empleos” (con bajos salarios y sin acceso a seguro de salud ni sistema de pensiones) aun controlando por distintas variables demográficas y relacionadas a la educación. Por otro lado, Stainback y Tang (2019), analizan para el caso chino la relación entre el origen urbano o rural de los trabajadores y la probabilidad de tener un “mal empleo”, pero enfocándose en el papel que cumplen los arreglos laborales no convencionales como “mediadores” de esta situación. Los autores plantean tres modelos distintos que analizan la relación entre las tres variables y muestran que el hecho de que los trabajadores de origen rural sean más propensos a trabajar bajo un arreglo “no convencional” explica cerca del 50% del hecho de que estos sean a su vez más propensos a conseguir un mal empleo. 
+
+En el Perú, diversos economistas han estudiado el tema de la calidad del empleo, aunque, en su mayoría, centrándose en las llamadas "transiciones laborales". Así, por ejemplo, Garavito (2010) analizó la vulnerabilidad en el empleo por género y etnicidad, entendiendo el término “vulnerabilidad” como el riesgo de una transición laboral que reduzca el bienestar del trabajador. Es decir, refiere al riesgo de caer en el desempleo o de obtener un empleo de menor calidad que el anterior. Al centrarse en transiciones, la autora utiliza datos de la ENAHO Panel para el periodo 2004-2006, y define la calidad del empleo a partir del ingreso proveniente del trabajo (si es menor o no a la remuneración mínima vital), la afiliación a un sistema de salud, y la posesión de un contrato de trabajo. En su análisis, la autora encontró que “las mujeres, los trabajadores indígenas, los jóvenes (de 14 a 24 años), los trabajadores mayores de 45 años, y aquellos con menor educación son los grupos con mayor probabilidad tanto de dejar la fuerza laboral como de ver reducida la calidad en su empleo” (Garavito, 2010, p.89). Rivarola (2018), por su parte, también se centra en las transiciones laborales, aunque realiza también un análisis "estático" sobre los determinantes de la calidad del empleo, encontrando que los jóvenes (de 14 a 24 años) y las personas con menor educación son más propensos a tener empleos de mala calidad. En contraste con lo encontrado por Garavito, ni el sexo de la persona, ni su etnicidad (si se entiende esta como ligada a la lengua materna) son factores significativos. El tema de la juventud como factor de vulnerabilidad al momento de obtener empleo ha sido analizado de manera más específica. Franco y Ñopo (2018), por ejemplo, hallan que, si bien el desempleo juvenil no es una cuestión "preocupante", sí lo son las altas tasas de subempleo y la falta de beneficios laborales en este grupo poblacional, en lo cual jugaría un papel importante la desigualdad en el acceso a la educación superior.
+
+A partir de esta revisión, sostenemos como hipótesis que el hecho de ser joven (tener entre 14 y 24 años) se relaciona con tener un empleo con un bajo puntaje de calidad. Asimismo, sostenemos que, a mayor nivel educativo, se obtendrá un empleo de mayor calidad. 
+
+## Modelo
+
+Para realizar el análisis, proponemos el siguiente modelo:
+
+$$ Y_i = B_0 + B_1*G + B_2*I + B_3*S + B_4*T + B_5*C + B_6*M + B_7*H + B_8(T*I) + B_9(T * G) + ε $$ 
+
+En donde:
+
+* Y = Indicador de calidad del empleo. Toma valores del 0 al 3, siendo 3 un empleo de "máxima calidad". Para construirlo, se             tomaron en cuenta 3 variables
+
+    + Ingreso: toma el valor de 1 si el trabajador percibe una remumeración mayor a la RMV.
+    + Indicador de horas: toma el valor de 1 si el trabajador no está subempleado por horas (es decir, si no trabaja menos de 15         horas semanales al mismo tiempo que puede y desea trabajar más) y al mismo tiempo no trabaja más de 48 horas semanales. 
+    + Formalidad: toma el valor de 1 si la persona labora bajo un contrato de trabajo y/o si su negocio o actividad económica se         encuentra registrada (ya sea como persona jurídica  o natural, con lo que se abarcan también empresarios y trabajadores            independientes).
+
+* G = Grupo de edad de la persona. Las categorías, basándonos en lo hecho por Garavito (2010) y Rivarola (2018), son las                 siguientes: de 14 a 24 años, de 15 a 44 años, de 45 a 65 años, y mayores de 65 años
+
+* I = Nivel educativo de la persona. Las categorías son: sin educación, educación inicial, primaria incompleta, primaria completa,       secundaria incompleta, secundaria completa, superior no universitaria incompleta, superior no universitaria completa,              superior universitaria incompleta, superior universitaria completa y maestría/doctorado. A estas categorías les hemos              asignado valores que van del 0 al 10 conforme se asciende de nivel educativo. Por dicha razón, no consideraremos en nuestro        modelo la educación básica especial, debido a la dificultad de incluirla dentro de la jerarquía de niveles educativos
+
+* S = Sexo de la persona
+
+* T = Tamaño de empresa en la que trabaja la persona. Se consideran los siguientes rangos: Hasta 20 personas, de 21 a 50 personas,       de 51 a 100 personas, de 101 a 500 personas, y más de 500 personas 
+
+* C = Estado civil de la persona. Las categorías son: conviviente, casado(a), viudo(a), divorciado(a), soltero(a)
+
+* M = Lengua materna de la persona. Las categorías son: quechua, aimara, otra lengua nativa, castellano, portugués, otra lengua          extranjera, no escucha/no habla, lengua de señas peruana, ashaninka, awajun/aguaruna, shipibo-konibo, shawi/chayahuita,            matsigenka/machiguenga, achuar
+
+* H = Rol en el hogar de la persona. Las categorías responden a la pregunta sobre el parentesco con el jefe de hogar de la ENAHO:        jefe(a) de hogar, esposa(o)/compañero(a), hijo(a)/hijastro(a), yerno/nuera, nieto(a), padres/suegros, otros parientes,             trabajador del hogar, pensionista, otros no parientes, hermano(a)
+
+Como señalamos, nos interesa hallar el efecto de la edad y el nivel educativo de las personas en la que calidad del empleo que obtuvieron, controlando por todas las otras variables incluidas en el modelo. Asimismo, estamos incluyendo en el modelo dos interacciones entre nuestras variables independientes de interés con la variable "tamaño de empresa". En ambos casos, sostendremos que, tanto el efecto de ser joven como el efecto del nivel educativo disminuirán conforme aumente el tamaño de la empresa en la que se trabaje.
+
+## Datos
+
+Los datos que utilizaremos provienen de la Encuesta Nacional de Hogares (ENAHO) del año 2020. En específico, utilizaremos los módulos 2, 3 y 5, los cuales recogen información sobre las características de los miembros del hogar, educación, y empleo e ingresos, respectivamente. Dicho año la muestra fue de 37 103 viviendas y, por cada módulo, fue de 12 6831, 115 777, y 91 315 personas, respectivamente. 
+
+## Estadísticos descriptivos
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE) 
+library(rio)
+empleo_calid1 <- import("Base_final.Rda") #Importamos base ya trabajada
+library(ggplot2)
+library(ggthemes)
+library(tidyverse)
+library(kableExtra)
+library(vcd)
+library(vcdExtra)
+library(stargazer)
+```
+
+Pasemos a presentar ahora la información descrpitiva de nuestra variable dependiente y de nuestras variables independientes. En primer lugar, el **Gráfico 1** nos muestra la distribución del puntaje de nuestro indicador de calidad de empleo. Recordemos que este puntaje va del 0 al 3, y contabiliza el número de características de un empleo "de calidad". 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Grafico1 <- ggplot(empleo_calid1, aes(x = calidad)) +  
+  geom_bar(aes(y = ..prop..),
+           fill= "aquamarine", 
+           colour="black", 
+           width = 0.5) + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(x="Nivel de calidad del empleo",
+       y="Porcentaje",
+       title= "Gráfico 1: PEA ocupada según nivel de calidad de su empleo",
+       caption = "Fuente: INEI (2020)") +
+  theme_bw() +
+  theme(plot.caption = element_text(hjust = 0, 
+                                    face = "bold"))
+Grafico1
+```
+
+Como podemos observar en el mencionado gráfico, la mayoría de personas poseen tan solo un punto en nuestro indicador de calidad de emploe, seguidas, aunque de lejos, por aquellas que poseen dos. En contraste, la menor parte de la población se ubica en los extremos (los que tienen un trabajo sin ningún elemento "de calidad" o con todos los que consideramos).
+
+Pasemos ahora a presentar nuestras variables independientes. El **Gráfico 2** muestra la distribución de nuestra muestra de acuerdo a sus edades. Vemos aquí que la mayoría de trabajadores tiene entre 25 y 44 años (35.33%), aunque el grupo más joven (de 14 a 24 años) y el grupo de personas de 45 a 65 años también incluyen a un porcentaje considerable de la población (ambos alrededor de un 28%). Por último, podemos ver que la población de adultos mayores de 65 años es la de menor número (tan solo un 7.71%).
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Tabla <- prop.table(table(empleo_calid1$grupo_etario))*100
+barplot(Tabla, main = "Gráfico 2: PEA ocupada por grupo de edad", xlab = "Grupo de edad", 
+        ylab = "Porcentaje", col = "aquamarine")
+```
+
+La **Tabla 1** nos muestra la distribución de la población ocupada de acuerdo a su máximo nivel educativo alcanzado. En ella podemos observar que un grupo mayoritario de la población (20.16%) llega como máximo a completar la secundaria, seguido de cerca por un 19.38% de personas que tienen primaria incompleta, y un 17.58% de personas con secundaria incompleta. Asimismo, las personas que poseen algún tipo de educación superior representan un porcentaje bastante bajo de la población: tan solo 5.72% de la PEA ocupada acabó la universidad, y 6.19% culminó algún tipo de educación superior no universitaria. Quienes poseen un posgrado, por su parte, representan un porcentaje menor aún (0.99%). 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tabla1 <- prop.table(table(empleo_calid1$Nivel_educa))*100
+
+tabla1 %>% 
+  kable(digits = 2, 
+        caption = "Tabla 1: PEA ocupada según máximo nivel educativo alcanzado",
+        format = "html", 
+        col.names = c("Nivel educativo", "Porcentaje")) %>% 
+  kable_classic("basic",full_width=F)
+```
+El **Gráfico 3** nos permite comparar la calidad del empleo según los distintos grupos de edad. Como podemos observar, en todos los grupos la mayoría de la población tiene un puntaje de 1 en nuestro índice, sin embargo, este porcentaje va decayendo conforme aumenta la edad. Así, mientras cerca del 51% de jóvenes de 14 a 24 años tienen este puntaje, en el caso de los mayores de 65 años este porcentaje cae a 38.22%. Por otro lado, el porcentaje de personas con los empleos de más alta calidad (3 puntos) aumenta ligeramente conforme aumenta la edad, siendo, por ejemplo, un 10.13% de jóvenes de 12 a 24 años quienes poseen esta puntuación, y un 16.38% de mayores de 65 años que poseen estos empleos. La prueba de X^2 confirma que existe asociación entre ambas variables (X^2 = 36.41, p = 3.353e-05) y que esta asociación es positiva, es decir, que la calidad del empleo aumenta a medida que aumenta la edad de un grupo. No obstante, por el momento observamos que es una relación débil (gamma = 0.067). Por último, si bien se podría haber pensado que la calidad del empleo vuelve a disminuir entre los mayores de 65 años, a simple vista no se observa ello, ya que, si bien el porcentaje de personas con un puntaje de 0 en nuestro indicador aumenta muy ligeramente (alrededor de 2% respecto al grupo de edad anterior), el porcentaje de personas con un puntaje de 1, como vimos, dosminuye de manera más pronunciada, al mismo tiempo que aumenta el porcentaje de personas con un puntaje de 3.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Grafico3 <- empleo_calid1 %>% 
+  drop_na(calidad, grupo_etario) %>% 
+  ggplot(aes(calidad, group = grupo_etario)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  facet_grid(~grupo_etario) + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(x="Calidad del empleo", y="Porcentaje",
+       fill="Nivel de calidad del empleo", title="Gráfico 3: Calidad del empleo según grupos de edad",
+       caption = "Fuente: INEI(2020)") +
+  scale_fill_brewer(palette= "Dark2") + 
+  theme_fivethirtyeight() +  
+  theme(plot.caption = element_text(hjust = 0, 
+                                    face = "bold"))
+Grafico3
+
+tablaedad <- table(empleo_calid1$grupo_etario, empleo_calid1$calidad)
+chisq.test(tablaedad)
+GKgamma(tablaedad)
+
+```
+
+
+
+
+
+
+Por último, la **Tabla 2** nos muestra la calidad de los empleos de las personas de acuerdo a su nivel educativo. En esta, podemos ver de manera relativamente clara que, a medida que aumenta el nivel educativo de las personas, aumenta también la calidad de sus empleos. Así, por ejemplo, observamos que nadie que tiene educación universitaria completa posee un empleo con un puntaje de 0 en nuestro indice de calidad, lo cual contrasta con quienes tienen, por ejemplo, solo educación inicial completa, entre quienes el porcentaje de personas que poseen un empleo de estas características llega a 15.23%. Si nos vamos al extremo opuesto, vemos por ejemplo que un 40.58% de quienes terminaron la universidad posee un empleo con un puntaje de 3 en nuestro indice, en contraste con el 4.57% de personas con educación inicial que posen un empleo de estas características. En cuanto a los empleos con un puntaje de 1 punto, observamos que el porcentaje de personas que los posee tiende a disminuir conforme aumenta su nivel educativo, mientras que, en el caso de los empleos con un puntaje de 2 en nuestro indice, el porcentaje de personas que los posee más bien aumenta conforme aumenta su nivel educativo, hasta llegar a los niveles más altos (universidad completa y posgrados), donde este porcentaje vuelve a disminuir (ya que en su mayoría estas personas poseen un empleo con un puntaje de 3 en nuestro índice). La prueba de X^2 nos muestra que existe asociación en estas dos variables (X^2 = 747.92, p < 2.2e-16) y, además, podemos decir que esta asociación es positiva (aumenta la calidad del empleo a la par que aumenta el nivel educativo de las personas) y de una intensidad mayor que en el caso de la edad (gamma = 0.311).
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tabla2 <- prop.table(table(empleo_calid1$Nivel_educa, empleo_calid1$calidad),1)*100
+tabla2 %>% 
+  kable(digits = 2, 
+        caption = "Tabla 2: Calidad de empleo según nivel educativo",
+        format = "html") %>% 
+  add_header_above(c("Nivel educativo" = 1, "Calidad de empleo" = 4)) %>% 
+  kable_classic("basic",full_width=F)
+
+tablaeduca <- table(empleo_calid1$Nivel_educa, empleo_calid1$calidad)
+chisq.test(tablaeduca)
+GKgamma(tablaeduca)  
+```
+
+## Resultados
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+empleo_calid1 <- empleo_calid1 %>% 
+  mutate(tamanoempresa=as.numeric(recode(Tamaño_empresa, "Hasta 20 personas"= 0, "De 21 a 50 personas"=1, "De 51 a 100 personas"=2, "De 101 a 500 personas"=3, "Más de 500 personas"= 4)))
+
+empleo_calid2 <- empleo_calid1 %>% 
+  mutate(niveduca=as.numeric(recode(Nivel_educa, "Sin nivel"= 0, "Educación inicial"= 1, 
+                                    "Primaria incompleta"=2, "Primaria completa"=3, 
+                                    "Secundaria incompleta"= 4, "Secundaria completa" = 5, 
+                                    "Superior no universitaria Incompleta" = 6, 
+                                    "Superior no universitaria completa" = 7, 
+                                    "Superior universitaria incompleta" = 8,
+                                    "Superior universitaria completa" = 9, "Maestria / Doctorado" = 10,
+                                    "Básica especial" = 11)))
+empleo_calid2 <- empleo_calid2 %>% 
+  filter(niveduca<11)
+
+modelo1 <- lm(empleo_calid2$calidad~empleo_calid2$niveduca + empleo_calid2$grupo_etario, data = empleo_calid2)
+modelo2 <- lm(empleo_calid2$calidad~empleo_calid2$niveduca + empleo_calid2$grupo_etario + empleo_calid2$Sexo + empleo_calid2$tamanoempresa + empleo_calid2$Estatus_marital + empleo_calid2$Lengua_materna + empleo_calid2$Rol_hogar)
+modelo3 <- lm(empleo_calid2$calidad~empleo_calid2$niveduca + empleo_calid2$grupo_etario + empleo_calid2$Sexo + empleo_calid2$tamanoempresa + empleo_calid2$Estatus_marital + empleo_calid2$Lengua_materna + empleo_calid2$Rol_hogar + (empleo_calid2$niveduca*empleo_calid2$tamanoempresa) + (empleo_calid2$grupo_etario*empleo_calid2$tamanoempresa))
+
+stargazer(modelo1, modelo2, modelo3, 
+          title = "Tabla 3: Efectos de la edad y el nivel educativo en la calidad del empleo en el Perú.                         Resultados de regresión lineal múltiple",
+          no.space = T,
+          style = "default",
+          type = "html",
+          column.labels = c("Modelo 1", "Modelo 2", "Modelo 3"),
+          dep.var.labels = "Nivel de calidad del empleo",
+          covariate.labels = c("Nivel educativo", "Grupo de edad: 25-44 años", "Grupo de edad: 45-65 años",
+                               "Grupo de edad: mayor de 65 años", "Sexo: Mujer", "Tamaño de empresa", 
+                               "Estado civil: casado", "Estado civil: viudo", "Estado civil divorciado",
+                               "Estado civil: separado", "Estado civil: soltero", "Lengua materna: aimara",
+                               "Lengua materna: castellano", "Lengua materna: Portugués",
+                               "Lengua materna: no escucha/no habla", "Lengua materna: lengua de señas",
+                               "Lengua materna: Shawi/Chayahuita", "Rol en hogar: esposo/compañero",
+                               "Rol en hogar: hijo/hijastro", "Rol en hogar: yerno/nuera", 
+                               "Rol en hogar: nieto", "Rol en hogar: padres/suegros", 
+                               "Rol en hogar: otros parientes", "Rol en hogar: trabajador del hogar",
+                               "Rol en hogar: otros no parientes", "Rol en hogar: hermano",
+                               "Nivel educativo*Tamaño de empresa", 
+                               "Grupo de edad: 25-44 años*Tamaño de empresa",
+                               "Grupo de edad: 45-65 años*Tamaño de empresa",
+                               "Grupo de edad: mayor de 65 años*Tamaño de empresa"))
+
+```
+En la **Tabla 3** podemos observar los reusltados de nuestros modelos de regresión lineal múltiple. En el modelo 1 incluimos solamente a nuestra variables de interés; en el modelo 2, a nuestras demás variables de control y, por último, en el modelo 3, presentamos todas las variables independientes y los efectos de las interacciones que incluimos en la ecuación mostrada anteriormente. Lo primero que podemos observar en la tabla es que, efectivamente, la educación tiene un efecto significativo y positivo sobre la calidad del empleo. Es decir, tenemos un 99% de confianza de que el efecto de la educación sobre la calidad del empleo es distinto a cero y, asimismo, en el primer modelo, vemos que, conforme se avanza un nivel educativo, en promedio la calidad del empleo que obtienen las personas aumenta en 1.07 puntos. La educación se relaciona significativamente con la calidad del empleo en nuestros modelos 2 y 3 también; sin embargo, su efecto disminuye. Asi, por ejemplo, en el modelo 3, que incluye todos nuestros predictores, observamos que el efecto del nivel educativo en la calidad del empleo es de 0.085, lo que quiere decir que, conforme las personas aumentan de nivel educativo, la calidad de los empleos que obtienen aumenta, en promedio, 0.085 puntos, lo cual, si bien parece poco, no lo es del todo si consideramos que nuestra escala va del 0 al 4. El hecho de que la educación tenga un impacto positivo en la calidad del empleo es consistente con lo hallado por Rivarola (2018) y suponemos que se debe al hecho de que una mayor educación produce una mano de obra más calificada que, por ende, puede venderse a un mayor precio en el mercado a empresas que, para obtenerla, deben asegurarse de ofrecer mejores estándares de empleo, como la presencia de un contrato y el respeto de una cantidad adecuada de horas de trabajo. En el caso de los trabajadores no dependientes, el tener un mayor nivel educativo les permite vender bienes o servicios más caros (por ejemplo, el caso de los profesionales independientes que venden sus servicios) y, por ende, no trabajar en exceso. Todo esto, podría también brindarles un incentivo para inscribirse formalmente como personas naturales o jurídicas. 
+
+Por otro lado, nuestra segunda hipótesis indicaba que el ser joven (tener de 14 a 24 años) tenía un impacto negativo en la calidad del empleo obtenido. En nuestros resultados, no obstante, no encontramos un efecto significativo de ser joven en el nivel de calidad del empleo. Encontramos, no obstante, que tener entre 25 y 44 años, entre 45 y 65 años e incluso ser mayor de 65 años tienen un efecto significativo y positivo en la calidad del empleo. Así, nuestro tercer modelo nos indica que las personas de entre 25 y 44 años tienen en promedio 0.118 puntos más en el índice de calidad de empleo. Asimismo, las personas de entre 45 y 65 años, así como las mayores de 65 años tienen 0.139 y 0.111 puntos más en el índice de calidad de empleo en promedio. Si bien estos hallazgos no son contradictorios con nuestra hipótesis, tampoco son una prueba de ella. De hecho, sí esperábamos que la calidad del empleo tienda a aumentar en los grupos de edad "intermedios"; sin embargo, sí sorprende que esto también suceda con los mayores de 65 años. Esto último va en contra de los hallazgos de estudios como los de Garavito (2010) quien concibe a los adultos mayores como un grupo vulnerable laboralmente. Por el momento nos es difícil explicar este hecho, ya que nuestros hallazgos muestran no sólo que ser adulto mayor no tiene un impacto negativo en la calidad del empleo, sino que incluso tiene un impacto positivo en esta. Por dicha razón, necesitaríamos estudiar este grupo de edad de manera específica.
+
+Por otro lado, en nuestro modelo planteamos dos interacciones de nuestras variables de interés con el tamaño de la empresa en la que se trabaja. De por sí, nuestros resultados muestran que esta variable es una de las que mayor efecto tienen en el nivel de calidad del empleo, ya que, como muestran los resultados de nuestro tercer modelo, por cada categoría que se suba en el tamaño de la empresa, la calidad del empleo del trabajador será, en promedio, 0.35 puntos mayor. A nuestro parecer, la razón de esto están en que, mientras más grande es la empresa, es más probable que esta sea formal y, por ende, ofrezca remuneraciones mayores a la RMV, así como un número adecuado de horas de trabajo semanales. Por esta misma razón planteamos que ejerce un efecto en el efecto del nivel educativo, ya que, por ejemplo, incluso las personas con un nivel educativo bajo que trabajen en empresas grandes pueden tener un empleo con más características de calidad. Por dicho motivo, como señalamos más arriba, sostenemos que el efecto de la educación en la calidad del empleo disminuirá conforme aumenta el tamaño de la empresa en la que se trabaja. Esto se comprueba al observar el **Gráfico 4**, que nos muestra precisamente que el efecto de la variable nivel educativo sobre la calidad del empleo disminuye conforme aumenta el tamaño de la empresa en la que se trabaja. Así, cuando una persona trabaja en una empresa de hasta 20 trabajadores, el efecto de aumentar un nivel educativo será de un aumento de 0.08496708 puntos en el nivel de calidad de su empleo; cuando trabaja en una empresa de 21 a 50 personas, será de 0.06524826 puntos; cuando trabaja en una empresa de 51 a 100 personas, será de 0.04552943 puntos; cuando trabaja en una empresa de 101 a 500 personas, será de 0.02581061 puntos y; cuando trabaja en una empresa de más de 500 personas, el efecto de aumentar un nivel educativo será un aumento de tan solo un 0.006091785 puntos en el nivel de calidad de su empleo.
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+efeducatamano0= modelo3$coefficients[[2]]+ (modelo3$coefficients[[28]]*0)
+efeducatamano0
+efeducatamano1= modelo3$coefficients[[2]]+ (modelo3$coefficients[[28]]*1)
+efeducatamano1
+efeducatamano2= modelo3$coefficients[[2]]+ (modelo3$coefficients[[28]]*2)
+efeducatamano2
+efeducatamano3= modelo3$coefficients[[2]]+ (modelo3$coefficients[[28]]*3)
+efeducatamano3
+efeducatamano4= modelo3$coefficients[[2]]+ (modelo3$coefficients[[28]]*4)
+efeducatamano4
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+efecto1A <- data.frame(efe=c(efeducatamano0, efeducatamano1, efeducatamano2, efeducatamano3, efeducatamano4),
+                       TamañoEmpresa=c(0,1,2,3,4))
+
+efectoeduca <- efecto1A %>% 
+  ggplot(aes(x=TamañoEmpresa, y=efe)) + geom_point()+
+  scale_x_discrete(limits=c(0,1,2,3,4),
+                   labels=c("Hasta 20 personas",
+                            "21 - 50 personas",
+                            "51 - 100 personas",
+                            "101 - 500 personas",
+                            "Más de 500 personas"))+
+  labs(y="Efecto del nivel educativo sobre la calidad del empleo",x="Tamaño de empresa",
+       title = "Gráfico 4: Efecto marginal del nivel educativo sobre la calidad del empleo según el tamaño de empresa en la que se trabaja")+
+  theme_bw()
+efectoeduca
+```
+La segunda interacción que habíamos planteado, por otro lado, nos indicaba que el efecto de ser joven en la calidad del empleo disminuiría conforme aumentase el tamaño de la empresa en la que se trabaja. No obstante, de acuerdo a nuestro modelo, el ser joven no se relaciona de manera significativa con la calidad del empleo que se posee. Aun así, observamos que el ser mayor de 65 años (que, como habíamos visto, tiene un efecto positivo en la calidad del empleo que se posee) y el tamaño de la empresa en la que se trabaja interactúan significativamente. El **Gráfico 5** nos permite ver con mayor claridad esta interacción, y nos indica, de manera similar al Gráfico 4, que, conforme aumenta el tamaño de la empresa en la que se trabaja, el efecto positivo de ser mayor de 65 años sobre la calidad del empleo disminuye. Así, una persona mayor de 65 años que trabaje en una empresa de hasta 20 personas tendrá, en promedio, un empleo con 0.1112091 puntos más de calidad; en caso trabaje en una empresa de 21 a 50 personas, tendrá 0.1020642 puntos más; en caso trabaje en una empresa de 51 a 100 personas, 0.09291932 puntos más; en caso trabaje en una empresa de 101 a 500 personas, 0.08377444 puntos más; y, en caso trabaje en una empresa de más de 500 personas, el efecto de tener 65 años será de 0.07462957 puntos más en el índice de calidad de empleo.
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+efeanciano0= modelo3$coefficients[[5]]+ (modelo3$coefficients[[30]]*0)
+efeanciano0
+efeanciano1= modelo3$coefficients[[5]]+ (modelo3$coefficients[[30]]*1)
+efeanciano1
+efeanciano2= modelo3$coefficients[[5]]+ (modelo3$coefficients[[30]]*2)
+efeanciano2
+efeanciano3= modelo3$coefficients[[5]]+ (modelo3$coefficients[[30]]*3)
+efeanciano3
+efeanciano4= modelo3$coefficients[[5]]+ (modelo3$coefficients[[30]]*4)
+efeanciano4
+
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+efecto2A <- data.frame(efe2=c(efeanciano0, efeanciano1, efeanciano2, efeanciano3, efeanciano4),
+                       TamañoEmpresa=c(0,1,2,3,4))
+
+efectoanciano <- efecto2A %>% 
+  ggplot(aes(x=TamañoEmpresa, y=efe2)) + geom_point()+
+  scale_x_discrete(limits=c(0,1,2,3,4),
+                   labels=c("Hasta 20 personas",
+                            "21 - 50 personas",
+                            "51 - 100 personas",
+                            "101 - 500 personas",
+                            "Más de 500 personas"))+
+  labs(y="Efecto de ser mayor de 65 años sobre la calidad del empleo",x="Tamaño de empresa",
+       title = "Gráfico 5: Efecto marginal de ser mayor de 65 años sobre la calidad del empleo según el tamaño de empresa en la que se trabaja")+
+  theme_bw()
+efectoanciano
+```
+Por otro lado, si bien a priori no nos interesaba analizar el efecto en la calidad del empleo del resto de variables predictoras incluidas en nuestro modelo, hay algunos resultados que vale la pena discutir. Así, si bien tenemos resultados esperados (como el hecho de que hablar aimara como lengua materna tenga un efecto negativo en la calidad del empleo, mientras que hablar castellano tiene un efecto positivo) tenemos resultados no esperados, como el hecho de que ser mujer tenga un efecto positivo en el nivel de calidad de empleo que se posee, lo cual va directamente en contra de lo hallado, por ejemplo, por Garavito (2010). Otro resultado sorprendente es el hecho de que, mientras que las personas que no hablan ni escuchan tienen, en promedio 0.995 puntos más en el índice de calidad de empleo, las personas que aprendieron lenguaje de señas, por el contrario, tienen en promedio 0.789 puntos menos en el índice. Esto a simple vista no puede ser explicado, y nos llama la atención a investigar específicamente el caso de las mujeres y el de las personas con discapacidad. No obstante, este último resultado puede deberse al bajo número de observaciones para estos casos (son 196 personas que aprendieron lengua de señas y 1287 que no escuchan y/o ni hablan) o podría indicar problemas en nuestro modelo. Esto nos lleva a nuestro último punto que es, justamente, los posibles problemas de nuestro modelo. En primer lugar, al tratarse de un *índice* de calidad de empleo, siempre hay un riesgo de haber cometido un error de medición, lo cual puede generar problemas de endogeneidad en nuestro modelo. como se señaló anteriormente, el índice fue construido sobre la base de los dos estudios empíricos revisados; sin embargo, como señala Rivarola (2018), la medición de la calidad del empleo ha sido un tema ampliamente discutido y no hay un acuerdo sobre cuál es la forma idónea de hacerlo, sobre todo en un país como el Perú. Por ello, para tener mayor certeza de que nuestro índice es correcto, debemos, como mínimo ampliar la revisión de literatura sobre las discusiones en torno a este tema. Otra cuestión que podría generar problemas de endogeneidad es que pueden haber variables omitidas en nuestro modelo. En específico, una importante que no estamos considerando es la etnicidad. Si bien la lengua materna se ha usado para medirla, en el mercado laboral peruano existe discriminación por la mera apariencia física (Galarza, Kogan y Yamada, 2012), la cual no siempre tiene que ver con la lengua materna. No obstante, era muy difícil incluir la etnicidad ya que la pregunta de la ENAHO sobre "autoidentificación étnica" solo era respondida por los  jefes de hogar, lo cual recortaba mucho nuestra muestra (Garavito, 2010).
+
+En segundo lugar, para probar si tenemos problemas de multicolinealidad, hemos calculado los coeficientes VIF (factor de inflación de la varianza) para las variables independientes de nuestros modelos, como muestran las tablas a continuación.Nuestro primer modelo, como vemos no presenta problemas de multicolinealidad. En el segundo modelo, vemos que algunas variables presentan coeficientes altos, sin embargo, entedemos que esto se debe a que se trata de categorías distintas de una misma variable, las cuales están correlacionadas entre sí y por eso tendrían exactamente el mismo coeficiente VIF. En nuestro tercer modelo esto vuelve a suceder y pasa lo mismo con nuestras interacciones. Asumimos que es ese el motivo por el cual la variable "Tamaño de empresa" posee un coeficiente VIF tan alto. En general, una forma de evitar esto podría ser simplificando nuestras variables predictoras categóricas. POr ejemplo, podríamos dicotomizar la variable "lengua materna" entre las personas que hablan castellano como lengua materna y a las que hablan otras lenguas. Esto además facilitaría la lectura e interpretación de la tabla de regresión.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(jtools)
+summ(modelo1, vifs = TRUE)
+summ(modelo2, vifs = TRUE)
+summ(modelo3, vifs = TRUE)
+```
+
+Por último, hemos puesto a prueba si nuestros modelos cumplen el supuesto de homocedasticidad. Los tres gráficos a continuación, referidos a los modelos 1, 2 y 3, respectivamente, nos muestran que la varianza de los residuos de nuestros modelos no es constante, lo cual se comprueba al realizar la prueba de Breusch - Pagan para los tres modelos, lo cual nos indica que tienen problemas de heterocedasticidad.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(lmtest)
+plot(modelo1, 1)
+plot(modelo2, 1)
+plot(modelo3, 1)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+bptest(modelo1)
+bptest(modelo2)
+bptest(modelo3)
+```
+
+Para solucionar este problema, hemos calculado los errores estándar robustos (RSE) de nuestros modelos, los cuales se presentan en las tablas 4, 5 y 6, para los modelos 1, 2 y 3, respectivamente. En las tablas podemos ver en la primera columna los coeficientes y los errores estándar tal como se mostraron en la tabla 3, mientras que, en la segunda columna, podemos ver los RSE. Al observar la tabla, nos damos cuenta de que, si bien los errores estándar cambiaron, en ninguno de los casos hemos cometido el error de observar un efecto significativo cuando en realidad no lo había. Asimismo, nada ha cambiado en lo que respecta a nuestras variables independientes de interés ni a las interacciones propuestas, por lo cual, la interpretación esbozada líneas arriba sigue siendo válida. Ahora bien, más allá de ello, vemos, ahora vemos, por ejemplo, que ser trabajador(a) y vivir en el hogar del jefe(a) encuestado(a) hogar tiene un efecto significativo (negativo) en la calidad del empleo. Lo mismo sucede con los yernos/nueras del jefe(a) del hogar que viven en su casa y con las personas que hablan portugués como lengua materna. Asimismo, vemos ahora que el ser viudo tiene un efecto significativo (positivo) en la calidad del empleo.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+library(sandwich)
+cov1 <- vcovHC(modelo1, type = "HC1")
+robust_se <- sqrt(diag(cov1))
+
+stargazer(modelo1, modelo1, type = "html",
+          se = list(NULL, robust_se),
+          title = "Tabla 4: Modelo 1. Resultados de regresión lineal múltiple",
+          no.space = T,
+          style = "default",
+          column.labels = c("Modelo 1", "Modelo 1 (RSE)"),
+          dep.var.labels = "Nivel de calidad del empleo",
+          covariate.labels = c("Nivel educativo", "Grupo de edad: 25-44 años", "Grupo de edad: 45-65 años",
+                               "Grupo de edad: mayor de 65 años"))
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+cov2 <- vcovHC(modelo2, type = "HC1")
+robust_se2 <- sqrt(diag(cov2))
+
+stargazer(modelo2, modelo2, type = "html",
+          se = list(NULL, robust_se2),
+          title = "Tabla 5: Modelo 2. Resultados de regresión lineal múltiple",
+          no.space = T,
+          style = "default",
+          column.labels = c("Modelo 2", "Modelo 2 (RSE)"),
+          dep.var.labels = "Nivel de calidad del empleo",
+          covariate.labels = c("Nivel educativo", "Grupo de edad: 25-44 años", "Grupo de edad: 45-65 años",
+                               "Grupo de edad: mayor de 65 años", "Sexo: Mujer", "Tamaño de empresa", 
+                               "Estado civil: casado", "Estado civil: viudo", "Estado civil divorciado",
+                               "Estado civil: separado", "Estado civil: soltero", "Lengua materna: aimara",
+                               "Lengua materna: castellano", "Lengua materna: Portugués",
+                               "Lengua materna: no escucha/no habla", "Lengua materna: lengua de señas",
+                               "Lengua materna: Shawi/Chayahuita", "Rol en hogar: esposo/compañero",
+                               "Rol en hogar: hijo/hijastro", "Rol en hogar: yerno/nuera", 
+                               "Rol en hogar: nieto", "Rol en hogar: padres/suegros", 
+                               "Rol en hogar: otros parientes", "Rol en hogar: trabajador del hogar",
+                               "Rol en hogar: otros no parientes", "Rol en hogar: hermano"))
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+cov3 <- vcovHC(modelo3, type = "HC1")
+robust_se3 <- sqrt(diag(cov3))
+
+stargazer(modelo3, modelo3, type = "html",
+          se = list(NULL, robust_se3),
+          title = "Tabla 6: Modelo 3. Resultados de regresión lineal múltiple",
+          no.space = T,
+          style = "default",
+          column.labels = c("Modelo 3", "Modelo 3 (RSE)"),
+          dep.var.labels = "Nivel de calidad del empleo",
+          covariate.labels = c("Nivel educativo", "Grupo de edad: 25-44 años", "Grupo de edad: 45-65 años",
+                               "Grupo de edad: mayor de 65 años", "Sexo: Mujer", "Tamaño de empresa", 
+                               "Estado civil: casado", "Estado civil: viudo", "Estado civil divorciado",
+                               "Estado civil: separado", "Estado civil: soltero", "Lengua materna: aimara",
+                               "Lengua materna: castellano", "Lengua materna: Portugués",
+                               "Lengua materna: no escucha/no habla", "Lengua materna: lengua de señas",
+                               "Lengua materna: Shawi/Chayahuita", "Rol en hogar: esposo/compañero",
+                               "Rol en hogar: hijo/hijastro", "Rol en hogar: yerno/nuera", 
+                               "Rol en hogar: nieto", "Rol en hogar: padres/suegros", 
+                               "Rol en hogar: otros parientes", "Rol en hogar: trabajador del hogar",
+                               "Rol en hogar: otros no parientes", "Rol en hogar: hermano",
+                               "Nivel educativo*Tamaño de empresa", 
+                               "Grupo de edad: 25-44 años*Tamaño de empresa",
+                               "Grupo de edad: 45-65 años*Tamaño de empresa",
+                               "Grupo de edad: mayor de 65 años*Tamaño de empresa"))
+```
+Para culminar, quisiéramos señalar ciertos pasos a seguir para continuar con esta investigación. En primer lugar, lo principal es ampliar la revisión de la liteartura, ya que esto nos dará ideas de cómo medir mejor la calidad del empleo, de qué variables disponibles en la ENAHO podemos estar omitiendo, y de qué maneras se ha modelado la relación entre las distintas variables. Este último tema es muy importante ya que debemos mejorar nuestro modelo por uno que se ajuste mejor a las características de nuestra variable independiente (una cuenta que va del 0 al 3). Asimismo, como se dijo durante el trabajo, se le podría dar un mejor tratamiento a las variables independientes categóricas, para que se facilite así la interpretación de los resultados. Entre ellas, para este trabajo se mantuvo la separación en grupos de edad en el modelo, guiándonos de lo hecho por Rivarola (2018) y Garavito (2010). No obstante, vistos nuestros resultados (todos los grupos de edad mayores se asocian con una calidad de empleo más alta), sería conveniente tratar esa variable como numérica
+
+## Bibliografía
+
+Galarza, F., Kogan, L., & Yamada, G. (2012). Detectando discriminación sexual y racial en el mercado laboral de Lima. En Galarza, F. (Ed.). *Discriminación en el Perú: Exploraciones en el Estado, la empresa y el mercado laboral*. Fondo Editorial, Universidad del Pacífico.
+
+Garavito, C. (2010). Vulnerabilidad en el empleo: género y etnicidad en el Perú. *Economía*, 33(66), 89-127.
+
+Kalleberg, A. L., Reskin, B. F., & Hudson, K. (2000). Bad jobs in America: Standard and nonstandard employment relations and job quality in the United States. *American sociological review*, 256-278.
+
+Franco, A. P., & Ñopo, H. (2018). *Ser joven en el Perú: educación y trabajo*. Lima: GRADE
+
+Rivarola, R. (2018). *Dinámica del mercado laboral en el Perú urbano. Un análisis desde la calidad del empleo en los trabajadores dependientes* [Tesis de licenciatura, Pontificia Universidad Católica del Perú]. http://hdl.handle.net/20.500.12404/15381 
+
+Stainback, K., & Tang, Z. (2019). Between state and market: Hukou, nonstandard employment, and bad jobs in urban China. *Chinese Sociological Review*, 51(3), 271-310.
+
